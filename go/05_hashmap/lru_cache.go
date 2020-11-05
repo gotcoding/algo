@@ -1,4 +1,4 @@
-package lrucache
+package hashmap
 
 const (
 	hosbit = uint64(^uint(0)) == ^uint64(0)
@@ -36,12 +36,12 @@ func NewLRUCache(capacity int) LRUCache {
 }
 
 // Get 查询
-func (c *LRUCache) Get(key int) {
+func (c *LRUCache) Get(key int) int {
 	if c.tail == nil {
 		return -1
 	}
 	if tmp := c.searchNode(key); tmp != nil {
-		this.moveToTail(tmp)
+		c.moveToTail(tmp)
 		return tmp.value
 	}
 	return -1
@@ -51,7 +51,7 @@ func (c *LRUCache) Get(key int) {
 func (c *LRUCache) Put(key, value int) {
 	if tmp := c.searchNode(key); tmp != nil {
 		tmp.value = value
-		this.moveToTail(tmp)
+		c.moveToTail(tmp)
 		return
 	}
 }
@@ -61,7 +61,7 @@ func (c *LRUCache) addNode(key, value int) {
 		key:   key,
 		value: value,
 	}
-	tmp := &this.node[hash(key)]
+	tmp := &c.node[hash(key)]
 	newNode.hnext = tmp.hnext
 	tmp.hnext = newNode
 	c.used++
@@ -80,10 +80,10 @@ func (c *LRUCache) delNode() {
 }
 
 func (c *LRUCache) searchNode(key int) *lruNode {
-	if this.tail == nil {
+	if c.tail == nil {
 		return nil
 	}
-	cur := c.node[hash(key)].hnext
+	tmp := c.node[hash(key)].hnext
 	for tmp != nil {
 		if tmp.key == key {
 			return tmp
@@ -106,14 +106,14 @@ func (c *LRUCache) moveToTail(node *lruNode) {
 	}
 
 	node.next = nil
-	this.tail.next = next
-	node.pre = this.tail
+	c.tail.next = node.next
+	node.pre = c.tail
 
 	c.tail = node
 }
 
 func hash(key int) int {
-	if hostbit {
+	if hosbit {
 		return (key ^ (key >> 32)) & (LENGTH - 1)
 	}
 	return (key ^ (key >> 16)) & (LENGTH - 1)
