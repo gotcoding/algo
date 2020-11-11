@@ -124,6 +124,7 @@ func (n *Node) postOrderTraversalNew() []interface{} {
 	return res
 }
 
+// BreadthFirstSearch 层次遍历（广度优先）
 func (n *Node) breadthFirstTraversal() []interface{} {
 	if n == nil {
 		return nil
@@ -143,4 +144,33 @@ func (n *Node) breadthFirstTraversal() []interface{} {
 		}
 	}
 	return res
+}
+
+// Layers 层数
+// 对任意一个子树对节点来说，它的深度=左右子树深度对最大值+1
+func (n *Node) Layers() int {
+	if n == nil {
+		return 0
+	}
+	leftLayers := n.left.Layers()
+	rightLayers := n.right.Layers()
+	if leftLayers > rightLayers {
+		return leftLayers + 1
+	}
+	return rightLayers + 1
+}
+
+// FindNode 查找节点
+func (n *Node) FindNode(root *Node, x interface{}) *Node {
+	if root == nil {
+		return nil
+	}
+	if root.value == x {
+		return root
+	}
+	p := n.FindNode(root.left, x)
+	if p != nil {
+		return p
+	}
+	return n.FindNode(root.right, x)
 }

@@ -29,4 +29,6 @@ func TestPreOrder(t *testing.T) {
 	fmt.Println(root.postOrderTraversalNew())
 
 	fmt.Println(root.breadthFirstTraversal())
+	fmt.Println(root.Layers())
+	fmt.Printf("查找：%s\n", root.FindNode(root, "H").value)
 }
