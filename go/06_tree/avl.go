@@ -120,6 +120,11 @@ func (n *AVLNode) FindMin() *AVLNode {
 }
 
 // RightRotate 顺时针旋转，右旋
+//             node  BF = -2
+//              /
+//         plchild     ----->       plchild    BF = 1
+//            /                        /   \
+//        pplchild                lchild   node
 func (n *AVLNode) RightRotate() *AVLNode {
 	headNode := n.Left
 	n.Left = headNode.Right
@@ -132,6 +137,11 @@ func (n *AVLNode) RightRotate() *AVLNode {
 }
 
 // LeftRotate 逆时针旋转，左旋
+//    node     BF = 2
+//       \
+//         prchild     ----->       prchild    BF = 1
+//           \                        /   \
+//           pprchild               node  pprchild
 func (n *AVLNode) LeftRotate() *AVLNode {
 	headNode := n.Right
 	n.Right = headNode.Left
@@ -144,6 +154,12 @@ func (n *AVLNode) LeftRotate() *AVLNode {
 }
 
 // LeftThenRightRotate 先逆时针旋转再顺时针旋转，先左旋在再右旋
+// 先左转再右转
+//          node                  node
+//         /            左          /     右
+//      node1         ---->    node2     --->         node2
+//          \                   /                     /   \
+//          node2s           node1                 node1  node
 func (n *AVLNode) LeftThenRightRotate() *AVLNode {
 	// 先把左子节点左旋转
 	n.Left = n.Left.LeftRotate()
@@ -152,6 +168,11 @@ func (n *AVLNode) LeftThenRightRotate() *AVLNode {
 }
 
 // RightThenLeftRotate 先顺时针旋转再逆时针旋转，先右旋再左旋
+//       node                  node
+//          \          右         \         左
+//          node1    ---->       node2     --->      node2
+//          /                       \                /   \
+//        node2                    node1           node  node1
 func (n *AVLNode) RightThenLeftRotate() *AVLNode {
 	// 先把右子节点右旋
 	n.Right = n.Right.RightRotate()
