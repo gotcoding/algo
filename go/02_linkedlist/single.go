@@ -145,13 +145,13 @@ func (ll *LinkedList) Reverse() {
 	if ll.head == nil || ll.head.next == nil || ll.head.next.next == nil {
 		return
 	}
-	var pre *LinkedNode = nil
+	var pre, next *LinkedNode
 	cur := ll.head.next
 	for cur != nil {
-		tmp := cur.next
+		next = cur.next
 		cur.next = pre
 		pre = cur
-		cur = tmp
+		cur = next
 	}
 	ll.head.next = pre
 }
