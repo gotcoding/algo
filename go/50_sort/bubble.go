@@ -1,7 +1,7 @@
 package sort
 
 // 冒泡排序
-// 每次比较两个数，每一轮冒泡出一个最大或者最小值放在已排序的最前面。
+// 每次比较相邻的两个数，每一轮冒泡出一个最大或者最小值放在已排序的最前面。
 // 时间复杂度为O(n^2)，空间复杂度O(1)
 func bubbleSort(d []int) []int {
 	for i := 0; i < len(d); i++ {
@@ -15,7 +15,7 @@ func bubbleSort(d []int) []int {
 }
 
 // 优化：记录每轮的交换次数，如果数组是有序的，则跳出循环
-// 时间复杂度为O(n^2)，最好则为O(n)
+// 时间复杂度为O(n^2)，最好则为O(n)，平均是O(n^2)
 func bubbleSortPro(d []int) []int {
 	for i := 0; i < len(d); i++ {
 		count := 0
