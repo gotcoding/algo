@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 // 快速排序
 func quickSort(arr []int) {

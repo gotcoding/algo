@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 // 归并排序
 func mergeSort(arr []int) []int {

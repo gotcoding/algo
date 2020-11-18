@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 // 希尔排序
 func shellSort(d []int) []int {

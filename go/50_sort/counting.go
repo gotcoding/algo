@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 func countingSort(arr []int) {
 	l := len(arr)

@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 // radixSort 基数排序
 func radixSort(arr []int) {

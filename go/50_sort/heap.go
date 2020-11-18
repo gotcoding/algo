@@ -1,6 +1,4 @@
-package sort
-
-import "fmt"
+package sort_dev
 
 func heapSort(arr []int) {
 	var length = len(arr)
@@ -23,7 +21,7 @@ func heapSort(arr []int) {
 		// 这里递归的把较大值一层层提上来
 		nodeSort(tree, 0, i-1)
 	}
-	fmt.Println(tree)
+	// fmt.Println(tree)
 }
 
 func nodeSort(tree []int, startNode, latestNode int) {

@@ -1,4 +1,4 @@
-package sort
+package sort_dev
 
 // 插入排序
 // 1.将数组中的数据分为两个区间，已排序区间和未排序区间
