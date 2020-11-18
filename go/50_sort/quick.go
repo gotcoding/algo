@@ -16,8 +16,8 @@ func separateSort(arr []int, start, end int) {
 
 func partition(arr []int, start, end int) int {
 	pivot := arr[end]
-	i := start
-	for j := start; j < end; j++ {
+	i := start                     // 慢指针
+	for j := start; j < end; j++ { // 快指针
 		if arr[j] < pivot {
 			if !(i == j) {
 				arr[i], arr[j] = arr[j], arr[i]

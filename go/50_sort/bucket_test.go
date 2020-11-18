@@ -5,8 +5,7 @@ import (
 	"testing"
 )
 
-func TestQuickSort(t *testing.T) {
+func TestBucketSort(t *testing.T) {
 	d := []int{4, 2, 9, 1, 8, 3, 5}
-	quickSort(d)
-	fmt.Println(d)
+	fmt.Println(bucketSort(d))
 }
