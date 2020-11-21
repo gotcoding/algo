@@ -48,7 +48,7 @@ func majorityElement2(nums []int) int {
 }
 
 // 方法三：Boyer-Moore 投票算法
-// 如果我们把众数记为 +1+1，把其他数记为 -1−1，将它们全部加起来，显然和大于 0，从结果本身我们可以看出众数比其他数多。
+// 如果我们把众数记为 +1，把其他数记为 -1，将它们全部加起来，显然和大于 0，从结果本身我们可以看出众数比其他数多。
 // 时间复杂度O(n)，空间复杂度O(1)
 func majorityElement3(nums []int) int {
 	count, candidate := 0, 0
