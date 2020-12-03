@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // 最长公共子序列 链接：https://leetcode-cn.com/problems/longest-common-subsequence
 // 给定两个字符串 text1 和 text2，返回这两个字符串的最长公共子序列的长度。
 
@@ -13,9 +15,88 @@ package main
 // 解释：最长公共子序列是 "ace"，它的长度为 3。
 
 func main() {
-
+	// fmt.Println(longestCommonSubsequence("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
+	// fmt.Println(longestCommonSubsequence("abc", "abc"))
+	// fmt.Println(longestCommonSubsequence("abc", "edf"))
+	fmt.Println(dp2("abcde", "ace"))
+	fmt.Println(dp2("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
+	fmt.Println(dp2("abc", "edf"))
+	fmt.Println(dp3("abcde", "ace"))
+	fmt.Println(dp3("pmjghexybyrgzczy", "hafcdqbgncrcbihkd"))
+	fmt.Println(dp3("abc", "edf"))
 }
 
-// func longestCommonSubsequence(text1 string, text2 string) int {
+var _s1, _s2 string
+var mem [][]int
 
-// }
+func longestCommonSubsequence(text1 string, text2 string) int {
+	_s1, _s2 = text1, text2
+	mem = make([][]int, len(_s1)+1)
+	for i := 0; i < len(_s1)+1; i++ {
+		mem[i] = make([]int, len(_s2)+1)
+	}
+	return dp(len(_s1)-1, len(_s2)-1)
+}
+
+func dp(i, j int) int {
+	if i == -1 || j == -1 {
+		return 0
+	}
+	if mem[i][j] > 0 {
+		return mem[i][j]
+	}
+	if _s1[i] == _s2[j] {
+		mem[i][j] = dp(i-1, j-1) + 1
+	} else {
+		mem[i][j] = Max(dp(i-1, j), dp(i, j-1))
+	}
+	return mem[i][j]
+}
+
+func Max(args ...int) int {
+	max := args[0]
+	for _, i := range args {
+		if i > max {
+			max = i
+		}
+	}
+	return max
+}
+
+// 动态规划，迭代实现
+func dp2(text1 string, text2 string) int {
+	m, n := len(text1), len(text2)
+	mem = make([][]int, m+1)
+	for i := 0; i < m+1; i++ {
+		mem[i] = make([]int, n+1)
+	}
+	for i := 1; i <= m; i++ {
+		for j := 1; j <= n; j++ {
+			if text1[i-1] == text2[j-1] {
+				mem[i][j] = mem[i-1][j-1] + 1
+			} else {
+				mem[i][j] = Max(mem[i-1][j], mem[i][j-1])
+			}
+		}
+	}
+	return mem[m][n]
+}
+
+// 动态规划，二维数组降成一维
+func dp3(text1 string, text2 string) int {
+	m, n := len(text1), len(text2)
+	mem := make([]int, n+1)
+	for i := 1; i <= m; i++ {
+		last := 0 //记录左上方的值
+		for j := 1; j <= n; j++ {
+			tmp := mem[j] //记录上方的值
+			if text1[i-1] == text2[j-1] {
+				mem[j] = last + 1
+			} else {
+				mem[j] = Max(tmp, mem[j-1])
+			}
+			last = tmp
+		}
+	}
+	return mem[n]
+}
