@@ -8,7 +8,7 @@ func TestGraph(t *testing.T) {
 	g.addEdge(1, 3)
 	g.addEdge(2, 3)
 	g.addEdge(5, 3)
-	// g.Print()
+	g.Print()
 	// g.BFS(1, 5)
 	g.DFS(1, 5)
 }
